@@ -1,15 +1,16 @@
 import React from "react";
+import HeadingSection from "./HeadingSection";
 
 export default function Main() {
   return (
   <main id="dashboard">
-    {/* <HeadingSection />
+    <HeadingSection />
     <section id="widgets">
-        <LinksWidget />
+        {/* <LinksWidget />
         <WeatherWidget />
         <PoliceEventWidget />
-        <NotesWidget />
-    </section> */}
+        <NotesWidget />  */}
+    </section>
   </main>)
   ;
 }
