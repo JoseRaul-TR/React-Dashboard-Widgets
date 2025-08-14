@@ -78,7 +78,7 @@ export default function HeadingSection() {
       >
         <Settings
           size={24}
-          className="text-white hover:text-gray-400 transition-colors duration-200"
+          className="text-white hover:text-gray-400 hover:cursor-pointer transition-colors duration-200"
         />
       </button>
 

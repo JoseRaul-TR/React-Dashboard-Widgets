@@ -4,8 +4,8 @@ export default function Footer() {
   // Get the current year
   const currentYear = new Date().getFullYear();
   return (
-    <footer>
-      <p>
+    <footer className="flex flex-col items-center justify-center">
+      <p className="text-center">
         &copy; {currentYear} José Raúl Tenza Ramírez
         <br />
         All rights reserved

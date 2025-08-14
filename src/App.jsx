@@ -29,7 +29,7 @@ function App() {
   return (
     // The main container div uses a custom CSS class to handle the background image.
     <div
-      className="flex flex-col min-h-screen min-w-screen text-white"
+      className="flex flex-col min-h-screen min-w-screen text-white p-4"
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
         backgroundSize: "cover",
