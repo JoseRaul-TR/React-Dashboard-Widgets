@@ -43,7 +43,7 @@ export default function Header() {
   const [hours, minutes] = currentTime.split(":");
 
   return (
-    <header id="topBar" className="flex flex-col items-center justify-center">
+    <header id="topBar" className="flex flex-col items-center justify-center p-1 bg-block/50 backdrop-blur-md rounded-x1 shadow-lg transition-all duration-300 ease-in-out">
       <p id="timeDate">
         {hours}
         <span className="blinking-colon">:</span>

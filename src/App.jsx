@@ -40,7 +40,9 @@ function App() {
       {/* The Header, Main, and Footer components are wrapped inside this
           main container to ensure they inherit the background. */}
       <Header />
-      <Main />
+      <div className="flex-grow flex items-center justify-center">
+        <Main />
+      </div>
       <Footer />
       {/* The BackgroundImage component is responsible for changing the background
           and is placed last to overlay the rest of the content. */}

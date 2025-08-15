@@ -1,4 +1,4 @@
-import { RefreshCw, Search } from "lucide-react";
+import { RefreshCw, Search, Settings2, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
@@ -10,6 +10,8 @@ function BackgroundImage({ onBackgroundChange }) {
   const [isLoading, setIsLoading] = useState(false);
   // State to hold any error messages from the API.
   const [error, setError] = useState(null);
+  // State for toggling settings visibility
+  const [isSettingsOpen, setIsSettingOpen] = useState(false);
 
   /**
    * Fetches an image from the Unsplash API based on the provided query
@@ -56,55 +58,72 @@ function BackgroundImage({ onBackgroundChange }) {
     fetchAndSetBackgroundImage();
   };
 
-  // HAndler for the "Search" button click.
+  // Handler for the "Search" button click.
   const handleSearchBackground = () => {
     fetchAndSetBackgroundImage(searchInput);
+  };
+
+  // Handler for background settings
+  const handleToggleSettings = () => {
+    setIsSettingOpen(!isSettingsOpen);
   };
 
   return (
     <section
       id="backgroundImage"
-      className="fixed bottom-4 right-4 z-10 p-4 bg-block/50 backdrop-blur-md rounded-x1 shadow-lg transition-all duration-300 ease-in-out"
+      className="fixed bottom-4 right-4 z-10 p-4 rounded-x1 shadow-lg transition-all duration-300 ease-in-out"
     >
-      <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 items-center">
+      <div className="flex justify-end mb-2">
         <button
-          onClick={handleRandomBackground}
-          disabled={isLoading}
-          className="flex items-center justify-center space-x-2 px-4 py-2 bg-slate-600 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-colors duration-200"
+          onClick={handleToggleSettings}
+          className="p-2 text-white hover:text-slate-400 hover:cursor-pointer transition-colors duration-200"
         >
-          <RefreshCw size={16} />
-          <span>Random background</span>
+          {isSettingsOpen ? <X size={24} /> : <Settings2 size={24} />}
         </button>
-        <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <input
-            type="text"
-            placeholder="Search image..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            disabled={isLoading}
-            className="w-full md:w-auto px-4 py-2 bg-slate-700 text-white placeholder-slate-400 rounded-lg border-2 border-transparent focus:border-slate-400 focus:outline-none transition-colors duration-200"
-          />
-          <button
-            onClick={handleSearchBackground}
-            disabled={isLoading || searchInput.length === 0}
-            className="flex items-center justify-center space-x-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-colors duration-200"
-          >
-            <Search size={16} />
-            <span>Search</span>
-          </button>
-        </div>
       </div>
-      {isLoading && (
-        <p className="text-center mt-2 text-sm text-sky-200">
-          Loading background image ...
-        </p>
-      )}
-      {error && (
-        <p className="text-center mt-2 text-sm text-red-400">{error}</p>
+
+      {isSettingsOpen && (
+        <>
+          <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 items-center">
+            <button
+              onClick={handleRandomBackground}
+              disabled={isLoading}
+              className="flex items-center justify-center space-x-2 px-4 py-2 bg-slate-600 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-colors duration-200"
+            >
+              <RefreshCw size={16} className="hover:cursor-pointer"/>
+              <span>Random background</span>
+            </button>
+            <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
+              <input
+                type="text"
+                placeholder="Search image..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                disabled={isLoading}
+                className="w-full md:w-auto px-4 py-2 bg-slate-700 text-white placeholder-slate-400 rounded-lg border-2 border-transparent focus:border-slate-400 focus:outline-none transition-colors duration-200"
+              />
+              <button
+                onClick={handleSearchBackground}
+                disabled={isLoading || searchInput.length === 0}
+                className="flex items-center justify-center space-x-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-colors duration-200"
+              >
+                <Search size={16} />
+                <span>Search</span>
+              </button>
+            </div>
+          </div>
+          {isLoading && (
+            <p className="text-center mt-2 text-sm text-sky-200">
+              Loading background image ...
+            </p>
+          )}
+          {error && (
+            <p className="text-center mt-2 text-sm text-red-400">{error}</p>
+          )}
+        </>
       )}
     </section>
   );
 }
-
 
 export default BackgroundImage;
