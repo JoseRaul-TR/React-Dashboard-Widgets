@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
 
 export default function Header() {
   // useState to manage the state of the current time and date
@@ -29,26 +28,21 @@ export default function Header() {
       setCurrentDate(dateString);
     }
     // Call the function once to set the initial values
-    updateTimeAndDate();    
+    updateTimeAndDate();
 
     // Set up the interval tu update every 1.5s
     const intervalId = setInterval(updateTimeAndDate, 1000);
-  
 
     //Clean-up function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
-  // Split the time string to handle the colon separetely
-  const [hours, minutes] = currentTime.split(":");
-
   return (
-    <header id="topBar" className="flex flex-col items-center justify-center p-1 bg-block/50 backdrop-blur-md rounded-x1 shadow-lg transition-all duration-300 ease-in-out">
-      <p id="timeDate">
-        {hours}
-        <span className="blinking-colon">:</span>
-        {minutes} {currentDate}
+    <header className="flex flex-col items-center p-2 bg-black/50 backdrop-blur-md rounded-xl shadow-lg transition-all duration-300 ease-in-out">
+      <p className="text-sm md:text-xl font-bold text-white">
+        {currentTime}
       </p>
+      <p className="text-xs md:text-sm text-slate-300">{currentDate}</p>
     </header>
   );
 }

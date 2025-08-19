@@ -1,5 +1,5 @@
 import { RefreshCw, Search, Settings2, X } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
 
@@ -71,7 +71,7 @@ function BackgroundImage({ onBackgroundChange }) {
   return (
     <section
       id="backgroundImage"
-      className="fixed bottom-4 right-4 z-10 p-4 rounded-x1 shadow-lg transition-all duration-300 ease-in-out"
+      className="fixed bottom-0 right-0 z-10 p-4 rounded-x1 shadow-lg transition-all duration-300 ease-in-out"
     >
       <div className="flex justify-end mb-2">
         <button

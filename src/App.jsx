@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Main from "./components/Main";
 import Footer from "./components/Footer";
 import BackgroundImage from "./components/BackgroundImage";
-import { RefreshCw, Search } from "lucide-react";
 import "./App.css";
+import Widgets from "./components/Widgets";
 
 /**
  * App.jsx - The main application component.
@@ -40,8 +39,8 @@ function App() {
       {/* The Header, Main, and Footer components are wrapped inside this
           main container to ensure they inherit the background. */}
       <Header />
-      <div className="flex-grow flex items-center justify-center">
-        <Main />
+      <div className="flex-grow">
+        <Widgets />
       </div>
       <Footer />
       {/* The BackgroundImage component is responsible for changing the background

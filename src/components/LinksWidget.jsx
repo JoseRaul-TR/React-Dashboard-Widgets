@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Plus, X, Edit, Trash2 } from "lucide-react";
 
+// Default links to use if local storage is empty.
+const defaultLinks = [
+  { title: "Google", url: "https://google.com" },
+  { title: "YouTube", url: "https://www.youtube.com/" },
+  { title: "GitHub", url: "https://github.com" },
+  { title: "ChatGPT", url: "https://chat.openai.com/" },
+];
+
 /**
  * LinkWidget.jsx - A React component for managing a list of quick links.
  * It allows users to add, edit, and delete links, with data persisted in
  * the browser's local storage.
  */
 const LinksWidget = () => {
-  // State to hold the array of links.
-  const [links, setLinks] = useState([]);
+  // Use a state initializer function to load from local storage only once.
+  const [links, setLinks] = useState(() => {
+    try {
+      const storedLinks = localStorage.getItem("dashboardLinks");
+      return storedLinks ? JSON.parse(storedLinks) : defaultLinks;
+    } catch (error) {
+      console.error("Error loading links from local storage: ", error);
+      return defaultLinks;
+    }
+  });
   // State for the title input field.
   const [linkTitle, setLinkTitle] = useState("");
   // State for the URL input field.
@@ -16,7 +32,7 @@ const LinksWidget = () => {
   // State to track if the add/eddit form is open.
   const [isFormOpen, setIsFormOpen] = useState(false);
   // State to store the index of the link bein edited. -1 means no editing.
-  const [editingIndex, setEditingIndex] = useState("");
+  const [editingIndex, setEditingIndex] = useState(-1);
   // State for displaying validation or error messages.
   const [errorMessage, setErrorMessage] = useState("");
   // State to control the delete confirmation modal.
@@ -24,31 +40,7 @@ const LinksWidget = () => {
   // State to hold the index of the link to be deleted.
   const [linkToDeleteIndex, setLinkToDeleteIndex] = useState(null);
 
-  // Default links to use if local storage is empty.
-  const defaultLinks = [
-    { title: "Google", url: "https://google.com" },
-    { title: "YouTube", url: "https://www.youtube.com/" },
-    { title: "GitHub", url: "https://github.com" },
-    { title: "ChatGPT", url: "https://chat.openai.com/" },
-  ];
-
-  // Load links from local storage on component mount.
-  useEffect(() => {
-    try {
-      const storedLinks = localStorage.getItem("dashboardLinks");
-      if (storedLinks) {
-        setLinks(JSON.parse(storedLinks));
-      } else {
-        setLinks(defaultLinks);
-      }
-    } catch (error) {
-      console.error("Error loading links from local storage: ", error);
-      setErrorMessage("Could not load links from local storage.");
-      setLinks(defaultLinks);
-    }
-  }, []); // Empty dependency array to ensure this runs only once.
-
-  // Save links to local storage whenever the 'links' state changes.
+  // useEffect to save links when changed *after* initial load.
   useEffect(() => {
     try {
       localStorage.setItem("dashboardLinks", JSON.stringify(links));
@@ -63,7 +55,7 @@ const LinksWidget = () => {
     try {
       new URL(url);
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   };
