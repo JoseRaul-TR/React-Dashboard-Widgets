@@ -66,7 +66,7 @@ const WeatherWidget = () => {
 
 
  return (
-    <div className="relative w-full max-w-sm p-6 bg-slate-800 rounded-2xl shadow-xl border-2 border-slate-700 text-slate-200">
+    <div className="relative w-full max-w-sm p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg text-slate-200">
       <h2 className="text-xl font-bold mb-4 text-center">Weather</h2>
 
       <button

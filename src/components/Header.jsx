@@ -38,11 +38,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex flex-col items-center p-2 bg-black/50 backdrop-blur-md rounded-xl shadow-lg transition-all duration-300 ease-in-out">
-      <p className="text-sm md:text-xl font-bold text-white">
-        {currentTime}
-      </p>
-      <p className="text-xs md:text-sm text-slate-300">{currentDate}</p>
+    <header className="flex flex-col items-center p-2 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg transition-all duration-300 ease-in-out">
+      <p className="text-xs md:text-sm">{currentDate}</p>
+      <p className="text-sm md:text-xl font-bold text-white">{currentTime}</p>
     </header>
   );
 }

@@ -61,7 +61,7 @@ export default function HeadingSection() {
   };
 
   return (
-    <section className="relative flex items-center justify-center p-4">
+    <section className="relative flex items-center justify-center p-4 m-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg">
       {/* Main heading */}
       <h1
         id="headingTitle"
