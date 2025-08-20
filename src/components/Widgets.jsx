@@ -4,6 +4,7 @@ import LinksWidget from "./LinksWidget";
 import WeatherWidget from "./WeatherWidget";
 import NotesWidget from "./NotesWidget";
 import CalculatorWidget from "./CalculatorWidget";
+import ConverterWidget from "./ConverterWidget";
 
 export default function Widgets() {
   return (
@@ -14,6 +15,7 @@ export default function Widgets() {
         <WeatherWidget />
         <NotesWidget />
         <CalculatorWidget />
+        <ConverterWidget />
     </section>
   </main>)
   ;
